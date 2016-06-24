@@ -2,6 +2,8 @@
 # -*- coding: utf-8 -*-
 
 from PySide import QtCore, QtGui
+from source.model.figures import Square, Circle
+from source.enums import *
 
 
 class Canvas(QtGui.QWidget):
@@ -9,11 +11,11 @@ class Canvas(QtGui.QWidget):
     def __init__(self):
         super(Canvas, self).__init__()
 
-        self.initUI()
+        self.init()
 
-    def initUI(self):
+    def init(self):
 
-        self.setGeometry(300, 300, 355, 280)
+        self.setFixedSize(720, 720)
         self.setWindowTitle('Brushes')
         self.show()
 
@@ -21,47 +23,16 @@ class Canvas(QtGui.QWidget):
 
         qp = QtGui.QPainter()
         qp.begin(self)
-        self.drawBrushes(qp)
+        self.draw_figures(qp)
         qp.end()
 
-    def drawBrushes(self, qp):
+    def draw_figures(self, qp):
 
-        brush = QtGui.QBrush(QtCore.Qt.SolidPattern)
-        qp.setBrush(brush)
-        qp.drawRect(10, 15, 90, 60)
+        square = Square(FigureType.SQUARE, FigurePosition.CENTER, FigureSize.SMALL)
+        square.draw(qp, Quadrant.BOTTOM_LEFT)
 
-        brush.setStyle(QtCore.Qt.Dense1Pattern)
-        qp.setBrush(brush)
-        qp.drawRect(130, 15, 90, 60)
+        circle = Circle(FigureType.CIRCLE, FigurePosition.RIGHT, FigureSize.MEDIUM)
+        circle.draw(qp, Quadrant.BOTTOM_LEFT)
 
-        brush.setStyle(QtCore.Qt.Dense2Pattern)
-        qp.setBrush(brush)
-        qp.drawRect(250, 15, 90, 60)
-
-        brush.setStyle(QtCore.Qt.Dense3Pattern)
-        qp.setBrush(brush)
-        qp.drawRect(10, 105, 90, 60)
-
-        brush.setStyle(QtCore.Qt.DiagCrossPattern)
-        qp.setBrush(brush)
-        qp.drawRect(10, 105, 90, 60)
-
-        brush.setStyle(QtCore.Qt.Dense5Pattern)
-        qp.setBrush(brush)
-        qp.drawRect(130, 105, 90, 60)
-
-        brush.setStyle(QtCore.Qt.Dense6Pattern)
-        qp.setBrush(brush)
-        qp.drawRect(250, 105, 90, 60)
-
-        brush.setStyle(QtCore.Qt.HorPattern)
-        qp.setBrush(brush)
-        qp.drawRect(10, 195, 90, 60)
-
-        brush.setStyle(QtCore.Qt.VerPattern)
-        qp.setBrush(brush)
-        qp.drawRect(130, 195, 90, 60)
-
-        brush.setStyle(QtCore.Qt.BDiagPattern)
-        qp.setBrush(brush)
-        qp.drawRect(250, 195, 90, 60)
+        square_2 = Square(FigureType.SQUARE, FigurePosition.CENTER, FigureSize.BIG)
+        square_2.draw(qp, Quadrant.TOP_LEFT)

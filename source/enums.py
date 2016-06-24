@@ -27,3 +27,10 @@ class FigureSize(Enum):
     SMALL  = 1
     MEDIUM = 2
     BIG    = 3
+
+
+class Quadrant(Enum):
+    TOP_LEFT     = 0
+    TOP_RIGHT    = 1
+    BOTTOM_LEFT  = 2
+    BOTTOM_RIGHT = 3
