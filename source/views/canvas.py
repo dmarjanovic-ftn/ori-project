@@ -39,7 +39,7 @@ class Canvas(QtGui.QWidget):
 
         square_2 = Square(FigureType.SQUARE, FigurePosition.CENTER, FigureSize.BIG)
         square_2.draw(qp, Quadrant.TOP_LEFT)
-        """
+
 
         triangle = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.EAST)
         triangle.draw(qp, Quadrant.TOP_LEFT)
@@ -47,5 +47,15 @@ class Canvas(QtGui.QWidget):
         triangle2.draw(qp, Quadrant.TOP_LEFT)
         triangle3 = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.SMALL, FigureOrientation.WEST)
         triangle3.draw(qp, Quadrant.TOP_LEFT)
+        """
         # triangle4 = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.MEDIUM, FigureOrientation.SOUTH)
         # triangle4.draw(qp, Quadrant.TOP_LEFT)
+
+        pie = Pie(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.WEST)
+        pie.draw(qp, Quadrant.TOP_LEFT)
+
+        line1 = Arrow(FigureType.LINE, FigurePosition.TOP, FigureSize.BIG, FigureOrientation.WEST)
+        line1.draw(qp, Quadrant.TOP_LEFT)
+
+        line2 = Arrow(FigureType.LINE, FigurePosition.RIGHT, FigureSize.SMALL, FigureOrientation.NORTH)
+        line2.draw(qp, Quadrant.TOP_LEFT)
