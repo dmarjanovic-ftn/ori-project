@@ -1,6 +1,7 @@
 from abc import abstractmethod
 from PySide import QtCore, QtGui
-from source.enums import FigurePosition
+from source.enums import FigurePosition, FigureOrientation
+from source.consts import *
 
 
 class Figure(object):
@@ -52,8 +53,8 @@ class Square(Figure):
 
 class Circle(Figure):
     """
-        Klasa u kojoj iscrtavamo krug
-        """
+    Klasa u kojoj iscrtavamo krug
+    """
 
     def draw(self, parent, quadrant):
 
@@ -79,3 +80,56 @@ class Circle(Figure):
             y += 240
 
         parent.drawEllipse(x, y, dimension, dimension)
+
+
+class Triangle(Figure):
+    """
+    Klasa u kojoj iscrtavamo trougao
+    """
+
+    def draw(self, parent, quadrant):
+        line_length = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
+        triangle_height = line_length * 1.73 / 2.0
+
+        x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
+        padding = (Sizes.CELL_WIDTH - line_length) // 2
+
+        x += padding
+        y += padding
+
+        if self._position == FigurePosition.CENTER:
+            x += Sizes.CELL_WIDTH
+            y += Sizes.CELL_HEIGHT
+        elif self._position == FigurePosition.TOP:
+            x += Sizes.CELL_WIDTH
+        elif self._position == FigurePosition.LEFT:
+            y += Sizes.CELL_HEIGHT
+        elif self._position == FigurePosition.RIGHT:
+            y += Sizes.CELL_HEIGHT
+            x += 2 * Sizes.CELL_WIDTH
+        elif self._position == FigurePosition.BOTTOM:
+            y += 2 * Sizes.CELL_HEIGHT
+
+        path = QtGui.QPainterPath()
+
+        print x + line_length/2, y
+        print x + line_length, y + triangle_height
+        print x, y + triangle_height
+
+        if self._orientation == FigureOrientation.NORTH:
+            parent.drawLine(x + line_length/2, y, x + line_length, y + triangle_height)
+            parent.drawLine(x + line_length, y + triangle_height, x, y + triangle_height)
+            parent.drawLine(x, y + triangle_height, x + line_length/2, y)
+        elif self._orientation == FigureOrientation.EAST:
+            parent.drawLine(x + line_length, y + line_length/2, x + line_length - triangle_height, y + line_length)
+            parent.drawLine(x + line_length - triangle_height, y + line_length, x + line_length - triangle_height, y)
+            parent.drawLine(x + line_length - triangle_height, y, x + line_length, y + line_length/2)
+        elif self._orientation == FigureOrientation.SOUTH:
+            parent.drawLine(x + line_length/2, y + line_length, x + line_length, y + line_length - triangle_height)
+            parent.drawLine(x + line_length, y + line_length - triangle_height, x, y + line_length - triangle_height)
+            parent.drawLine(x, y + line_length - triangle_height, x + line_length/2, y + line_length)
+        elif self._orientation == FigureOrientation.WEST:
+            parent.drawLine(x, y + line_length/2, x + triangle_height, y + line_length)
+            parent.drawLine(x + triangle_height, y + line_length, x + triangle_height, y)
+            parent.drawLine(x + triangle_height, y, x, y + line_length/2)
+

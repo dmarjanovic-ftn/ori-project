@@ -2,10 +2,12 @@ from enum import Enum
 
 
 class FigureType(Enum):
-    SQUARE = 1
-    CIRCLE = 2
-    LINE   = 3
-    ARROW  = 4
+    SQUARE   = 1
+    CIRCLE   = 2
+    TRIANGLE = 3
+    PIE      = 4
+    LINE     = 5
+    ARROW    = 6
 
 
 class FigurePosition(Enum):

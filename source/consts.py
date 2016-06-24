@@ -4,3 +4,6 @@ class Sizes(object):
 
     QUADRANT_WIDTH  = 360
     QUADRANT_HEIGHT = 360
+
+    FIXED_FIGURE_SIZE = 20
+    FIGURE_SIZE_PARAM = 30
