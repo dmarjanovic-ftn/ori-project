@@ -27,35 +27,35 @@ class Canvas(QtGui.QWidget):
         qp.end()
 
     def draw_figures(self, qp):
-        """
-        square = Square(FigureType.SQUARE, FigurePosition.TOP, FigureSize.SMALL)
-        square.draw(qp, Quadrant.BOTTOM_LEFT)
+        fig1 = Figure(FigureType.SQUARE, FigurePosition.TOP, FigureSize.SMALL)
+        fig2 = Circle(FigureType.CIRCLE, FigurePosition.RIGHT, FigureSize.MEDIUM)
+        fig3 = Circle(FigureType.CIRCLE, FigurePosition.BOTTOM, FigureSize.BIG)
+        fig4 = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.EAST)
+        fig5 = Pie(FigureType.PIE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.WEST)
+        fig6 = Arrow(FigureType.ARROW, FigurePosition.RIGHT, FigureSize.SMALL, FigureOrientation.NORTH)
 
-        circle = Circle(FigureType.CIRCLE, FigurePosition.RIGHT, FigureSize.MEDIUM)
-        circle.draw(qp, Quadrant.BOTTOM_LEFT)
+        figures = [fig1, fig2, fig3, fig4, fig5, fig6]
 
-        circle_2 = Circle(FigureType.CIRCLE, FigurePosition.BOTTOM, FigureSize.BIG)
-        circle_2.draw(qp, Quadrant.BOTTOM_LEFT)
+        i = 0
+        for figure in figures:
+            if figure._type == FigureType.SQUARE:
+                figure.__class__ = Square
+            elif figure._type == FigureType.CIRCLE:
+                figure.__class__ = Circle
+            elif figure._type == FigureType.TRIANGLE:
+                figure.__class__ = Triangle
+            elif figure._type == FigureType.PIE:
+                figure.__class__ = Pie
+            elif figure._type == FigureType.LINE:
+                figure.__class__ = Line
+            elif figure._type == FigureType.ARROW:
+                figure.__class__ = Arrow
 
-        square_2 = Square(FigureType.SQUARE, FigurePosition.CENTER, FigureSize.BIG)
-        square_2.draw(qp, Quadrant.TOP_LEFT)
+            if i < 2:
+                figure.draw(qp, Quadrant.TOP_LEFT)
+            elif i < 4:
+                figure.draw(qp, Quadrant.TOP_RIGHT)
+            else:
+                figure.draw(qp, Quadrant.BOTTOM_LEFT)
 
-
-        triangle = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.EAST)
-        triangle.draw(qp, Quadrant.TOP_LEFT)
-        triangle2 = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.MEDIUM, FigureOrientation.NORTH)
-        triangle2.draw(qp, Quadrant.TOP_LEFT)
-        triangle3 = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.SMALL, FigureOrientation.WEST)
-        triangle3.draw(qp, Quadrant.TOP_LEFT)
-        """
-        # triangle4 = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.MEDIUM, FigureOrientation.SOUTH)
-        # triangle4.draw(qp, Quadrant.TOP_LEFT)
-
-        pie = Pie(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.WEST)
-        pie.draw(qp, Quadrant.TOP_LEFT)
-
-        line1 = Arrow(FigureType.LINE, FigurePosition.TOP, FigureSize.BIG, FigureOrientation.WEST)
-        line1.draw(qp, Quadrant.TOP_LEFT)
-
-        line2 = Arrow(FigureType.LINE, FigurePosition.RIGHT, FigureSize.SMALL, FigureOrientation.NORTH)
-        line2.draw(qp, Quadrant.TOP_LEFT)
+            i += 1
