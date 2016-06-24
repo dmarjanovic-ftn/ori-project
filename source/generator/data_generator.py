@@ -1,8 +1,8 @@
 # -*- coding: utf-8 -*-
 
 from random import randint
-from figures import Figure
-from enums import *
+from source.model.figures import Figure
+from source.enums import *
 
 class DataGenerator():
     def __init__(self, output):
@@ -50,8 +50,8 @@ class DataGenerator():
             figure_size1 = FigureSize(randint(1,3))
             figure_size2 = FigureSize(randint(1,3))
         
-        figure1 = Figure(figure_type1, figure_pos1, figure_orient1, figure_size1)
-        figure2 = Figure(figure_type2, figure_pos2, figure_orient2, figure_size2)
+        figure1 = Figure(figure_type1, figure_pos1, figure_size1, figure_orient1)
+        figure2 = Figure(figure_type2, figure_pos2, figure_size2, figure_orient2)
 
         return [figure1, figure2]
     
@@ -62,7 +62,7 @@ class DataGenerator():
         if(fig_type == FigureType.CIRCLE or fig_type == FigureType.PIE):
             return [FigureType.CIRCLE, FigureType.PIE][randint(0,1)]
         else:
-            return [FigureType.TRAINGLE, FigureType.SQUARE][randint(0,1)]
+            return [FigureType.TRIANGLE, FigureType.SQUARE][randint(0,1)]
     
     
     def create_analog(self, figure_tl1, figure_tl2, figure_tr1, figure_tr2, figure_bl1, figure_bl2):
@@ -74,8 +74,8 @@ class DataGenerator():
         analog_position2 = figure_tr2._position
         analog_orientation2 = figure_tr2._orientation 
          
-        f1 = Figure(analog_type1, analog_position1, analog_orientation1, 0)
-        f2 = Figure(analog_type2, analog_position2, analog_orientation2, 0)
+        f1 = Figure(analog_type1, analog_position1, 0, analog_orientation1)
+        f2 = Figure(analog_type2, analog_position2, 0, analog_orientation2)
 
         self.size_translation(figure_tl1, figure_tr1, figure_bl1, f1)
         self.size_translation(figure_tl2, figure_tr2, figure_bl2, f2)
@@ -105,7 +105,7 @@ class DataGenerator():
         
     
 if __name__ == "__main__":
-    dg = DataGenerator('output.txt');
+    dg = DataGenerator('output.txt')
     
     box = dg.generate_data()
     for figure in box:

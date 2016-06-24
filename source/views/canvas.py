@@ -4,6 +4,8 @@
 from PySide import QtCore, QtGui
 from source.model.figures import *
 from source.enums import *
+from source.consts import *
+from source.actions.actions import Actions
 
 
 class Canvas(QtGui.QWidget):
@@ -14,28 +16,20 @@ class Canvas(QtGui.QWidget):
         self.init()
 
     def init(self):
-
-        self.setFixedSize(720, 720)
-        self.setWindowTitle('Brushes')
+        self.setFixedSize(Sizes.BOX_WIDTH, Sizes.BOX_HEIGHT)
         self.show()
 
     def paintEvent(self, e):
-
         qp = QtGui.QPainter()
         qp.begin(self)
-        self.draw_figures(qp)
+        pen = QtGui.QPen()
+        pen.setWidthF(1.5)
+        qp.setPen(pen)
+        self.draw_figures(qp, Actions.figures)
         qp.end()
 
-    def draw_figures(self, qp):
-        fig1 = Figure(FigureType.SQUARE, FigurePosition.TOP, FigureSize.SMALL)
-        fig2 = Circle(FigureType.CIRCLE, FigurePosition.RIGHT, FigureSize.MEDIUM)
-        fig3 = Circle(FigureType.CIRCLE, FigurePosition.BOTTOM, FigureSize.BIG)
-        fig4 = Triangle(FigureType.TRIANGLE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.EAST)
-        fig5 = Pie(FigureType.PIE, FigurePosition.CENTER, FigureSize.BIG, FigureOrientation.WEST)
-        fig6 = Arrow(FigureType.ARROW, FigurePosition.RIGHT, FigureSize.SMALL, FigureOrientation.NORTH)
-
-        figures = [fig1, fig2, fig3, fig4, fig5, fig6]
-
+    @staticmethod
+    def draw_figures(qp, figures):
         i = 0
         for figure in figures:
             if figure._type == FigureType.SQUARE:
@@ -55,7 +49,9 @@ class Canvas(QtGui.QWidget):
                 figure.draw(qp, Quadrant.TOP_LEFT)
             elif i < 4:
                 figure.draw(qp, Quadrant.TOP_RIGHT)
-            else:
+            elif i < 6:
                 figure.draw(qp, Quadrant.BOTTOM_LEFT)
+            else:
+                figure.draw(qp, Quadrant.BOTTOM_RIGHT)
 
             i += 1
