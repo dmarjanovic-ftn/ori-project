@@ -14,8 +14,9 @@ class Actions(object):
     @staticmethod
     def accept_example(canvas):
         output_file = open(Actions.data_generator.output, 'a')
-        print Actions.figures[0]
-        output_file.write(str(Actions.figures[0]) + "\n")
+        for figure in Actions.figures:
+            output_file.write(str(figure) + ", ")
+        output_file.write("\n")
         Actions.generate_figures()
         canvas.repaint()
         output_file.close()

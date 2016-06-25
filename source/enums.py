@@ -20,8 +20,8 @@ class FigurePosition(Enum):
 
 class FigureOrientation(Enum):
     EAST  = 1
-    WEST  = 2
-    SOUTH = 3
+    SOUTH = 2
+    WEST  = 3
     NORTH = 4
 
 

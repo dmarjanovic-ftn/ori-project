@@ -31,6 +31,7 @@ class Canvas(QtGui.QWidget):
     @staticmethod
     def draw_figures(qp, figures):
         i = 0
+
         for figure in figures:
             if figure._type == FigureType.SQUARE:
                 figure.__class__ = Square

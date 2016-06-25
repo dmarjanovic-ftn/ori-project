@@ -20,7 +20,7 @@ class Figure(object):
         pass
 
     def __str__(self):
-        return str(self._type) + ", " + str(self._position)
+        return str(self._type.value) + ", " + str(self._position.value) + ", " + str(self._orientation.value) + ", " + str(self._size.value)
 
     def __repr__(self):
         return str(self._type) + ", " + str(self._position)
@@ -51,6 +51,7 @@ class Square(Figure):
             y += Sizes.CELL_HEIGHT
             x += 2 * Sizes.CELL_WIDTH
         elif self._position == FigurePosition.BOTTOM:
+            x += Sizes.CELL_WIDTH
             y += 2 * Sizes.CELL_HEIGHT
 
         parent.drawRect(x, y, dimension, dimension)
@@ -82,6 +83,7 @@ class Circle(Figure):
             x += 2 * Sizes.CELL_WIDTH
         elif self._position == FigurePosition.BOTTOM:
             y += 2 * Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH
 
         parent.drawEllipse(x, y, dimension, dimension)
 
@@ -112,6 +114,7 @@ class Triangle(Figure):
             x += 2 * Sizes.CELL_WIDTH
         elif self._position == FigurePosition.BOTTOM:
             y += 2 * Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH
 
         if self._orientation == FigureOrientation.NORTH:
             parent.drawLine(x + line_length / 2, y, x + line_length, y + triangle_height)
@@ -156,16 +159,17 @@ class Pie(Circle):
             y += Sizes.CELL_HEIGHT
             x += 2 * Sizes.CELL_WIDTH
         elif self._position == FigurePosition.BOTTOM:
+            x += Sizes.CELL_WIDTH
             y += 2 * Sizes.CELL_HEIGHT
 
         if self._orientation == FigureOrientation.NORTH:
-            parent.drawPie(x, y, dimension, dimension, 0, 12 * 360)
+            parent.drawPie(x, y, dimension, dimension, 6 * 360, 12 * 360)
         elif self._orientation == FigureOrientation.EAST:
-            parent.drawPie(x, y, dimension, dimension, 4 * 360, 12 * 360)
+            parent.drawPie(x, y, dimension, dimension, 2 * 360, 12 * 360)
         elif self._orientation == FigureOrientation.SOUTH:
-            parent.drawPie(x, y, dimension, dimension, 8 * 360, 12 * 360)
+            parent.drawPie(x, y, dimension, dimension, 14 * 360, 12 * 360)
         elif self._orientation == FigureOrientation.WEST:
-            parent.drawPie(x, y, dimension, dimension, 12 * 360, 12 * 360)
+            parent.drawPie(x, y, dimension, dimension, 10 * 360, 12 * 360)
 
 
 class Line(Figure):
@@ -193,6 +197,7 @@ class Line(Figure):
             x += 2 * Sizes.CELL_WIDTH
         elif self._position == FigurePosition.BOTTOM:
             y += 2 * Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH
 
         if self._orientation == FigureOrientation.WEST or self._orientation == FigureOrientation.EAST:
             parent.drawLine(x, y, x + line_length, y)
@@ -224,6 +229,7 @@ class Arrow(Figure):
             y += Sizes.CELL_HEIGHT
             x += 2 * Sizes.CELL_WIDTH
         elif self._position == FigurePosition.BOTTOM:
+            x += Sizes.CELL_WIDTH
             y += 2 * Sizes.CELL_HEIGHT
 
         if self._orientation == FigureOrientation.EAST:
