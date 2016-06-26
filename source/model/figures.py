@@ -20,10 +20,11 @@ class Figure(object):
         pass
 
     def __str__(self):
-        return str(self._type.value) + ", " + str(self._position.value) + ", " + str(self._orientation.value) + ", " + str(self._size.value)
+        return str(self._type.value) + "," + str(self._position.value) + "," + str(self._orientation.value) + "," \
+            + str(self._size.value)
 
     def __repr__(self):
-        return str(self._type) + ", " + str(self._position)
+        return str(self._type) + "," + str(self._position)
 
 
 class Square(Figure):

@@ -1,7 +1,7 @@
 #!/usr/bin/python
 # -*- coding: utf-8 -*-
 
-from PySide import QtCore, QtGui
+from PySide import QtGui
 from canvas import Canvas
 from source.consts import Sizes
 from source.actions.actions import Actions
@@ -41,4 +41,3 @@ class MainWindow(QtGui.QMainWindow):
         panel.setLayout(layout)
 
         self.setCentralWidget(panel)
-

@@ -4,6 +4,7 @@ from random import randint
 from source.model.figures import Figure
 from source.enums import *
 
+
 class DataGenerator():
     def __init__(self, output):
         self.output = output
@@ -19,13 +20,13 @@ class DataGenerator():
         figure_trq1._type = DataGenerator.get_random_mapped_types(figure_tlq1._type)
         figure_trq2._type = DataGenerator.get_random_mapped_types(figure_tlq2._type)
                 
-        #postavljanje figura iz donjeg lijevog kvadranta na site pozicije kao u gornjem lijevom         
+        # postavljanje figura iz donjeg lijevog kvadranta na site pozicije kao u gornjem lijevom
         figure_blq1, figure_blq2 = self.get_random_figures(figure_tlq1._position, figure_tlq2._position)
 
-        #analogna figura
+        # analogna figura
         figure_brq1, figure_brq2 = self.create_analog(figure_tlq1, figure_tlq2, figure_trq1, figure_trq2, figure_blq1, figure_blq2)
 
-        return [figure_tlq1, figure_tlq2, figure_trq1, figure_trq2, figure_blq1, figure_blq2, figure_brq1, figure_brq2]   
+        return [figure_tlq1, figure_tlq2, figure_trq1, figure_trq2, figure_blq1, figure_blq2, figure_brq1, figure_brq2]
     
     def get_random_figures(self, pos1, pos2):
         figure_pos1 = FigurePosition(pos1)
@@ -150,8 +151,13 @@ class DataGenerator():
         out_figure._orientation = FigureOrientation(abs((in_figure3._orientation.value - diff - 1) % 4) + 1)
 
 if __name__ == "__main__":
-    dg = DataGenerator('output.txt')
-    
-    box = dg.generate_data()
-    for figure in box:
-        print(figure)
+    dg = DataGenerator('../../docs/generated-test-examples.csv')
+
+    output_file = open(dg.output, 'a')
+    for i in xrange(20):
+        my_str = ''
+        for figure in dg.generate_data():
+            my_str += str(figure) + ","
+        output_file.write(my_str[:-1] + "\n")
+
+    output_file.close()
