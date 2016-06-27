@@ -22,6 +22,13 @@ class Canvas(QtGui.QWidget):
     def paintEvent(self, e):
         qp = QtGui.QPainter()
         qp.begin(self)
+        qp.setBrush(QtGui.QColor(255, 255, 255))
+        qp.drawRect(0, 0, Sizes.QUADRANT_WIDTH, Sizes.QUADRANT_HEIGHT)
+        qp.drawRect(Sizes.QUADRANT_WIDTH, 0, Sizes.QUADRANT_WIDTH - 1, Sizes.QUADRANT_HEIGHT)
+        qp.drawRect(0, Sizes.QUADRANT_HEIGHT, Sizes.QUADRANT_WIDTH, Sizes.QUADRANT_HEIGHT - 5)
+        qp.setBrush(QtGui.QColor(165, 214, 167))
+        qp.drawRect(Sizes.QUADRANT_WIDTH, Sizes.QUADRANT_HEIGHT, Sizes.QUADRANT_WIDTH - 1, Sizes.QUADRANT_HEIGHT - 5)
+        qp.setBrush(QtGui.QColor(255, 255, 255))
         pen = QtGui.QPen()
         pen.setWidthF(1.5)
         qp.setPen(pen)
@@ -53,6 +60,7 @@ class Canvas(QtGui.QWidget):
             elif i < 6:
                 figure.draw(qp, Quadrant.BOTTOM_LEFT)
             else:
+                qp.setBrush(QtGui.QColor(165, 214, 167))
                 figure.draw(qp, Quadrant.BOTTOM_RIGHT)
 
             i += 1

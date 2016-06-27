@@ -12,11 +12,11 @@ class MainWindow(QtGui.QMainWindow):
         super(MainWindow, self).__init__()
 
         self.setWindowTitle(u"ORI 2016 - Baćo & dmarjanovic")
-        self.showMaximized()
-        self.setStyleSheet("background-color: #FFF;")
+        # self.showMaximized()
+        self.setStyleSheet("background-color: #CFD8DC;")
 
         panel = QtGui.QWidget()
-        panel.setFixedSize(Sizes.BOX_WIDTH + 180, Sizes.BOX_HEIGHT)
+        panel.setFixedSize(Sizes.BOX_WIDTH + 180, Sizes.BOX_HEIGHT + 15)
 
         buttons = QtGui.QVBoxLayout()
         accept = QtGui.QPushButton("Prihvati")
