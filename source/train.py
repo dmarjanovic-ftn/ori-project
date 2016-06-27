@@ -46,8 +46,8 @@ def train_tree_figures_input_one_figure_output():
 
     # Kreiranje modela
     model = Sequential()
-    model.add(Dense(16, input_dim=24, input_shape=(1, 24), init='uniform', activation='linear'))
-    model.add(Dense(12, init='uniform', activation='linear'))
+    model.add(Dense(10, input_dim=24, input_shape=(1, 24), init='uniform', activation='linear'))
+    # model.add(Dense(12, init='uniform', activation='linear'))
     model.add(Dense(8, init='uniform', activation='linear'))
 
     # Kompajliranje modela
@@ -68,7 +68,7 @@ def train_tree_figures_input_one_figure_output():
     # model = model_from_json(open('model.json').read())
     # model.set_weights(weights)
 
-    print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
+    print("%s: %.2f%%" % (model.metrics_names[1], scores[1] * 100))
 
     dataset = numpy.loadtxt("../docs/generated-test-examples.csv", delimiter=",")
     test_in = dataset[:, 0:24]

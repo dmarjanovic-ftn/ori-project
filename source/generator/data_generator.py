@@ -153,7 +153,7 @@ class DataGenerator():
 if __name__ == "__main__":
     dg = DataGenerator('../../docs/generated-test-examples.csv')
 
-    output_file = open(dg.output, 'a')
+    output_file = open(dg.output, 'w')
     for i in xrange(20):
         my_str = ''
         for figure in dg.generate_data():
