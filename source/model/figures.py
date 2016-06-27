@@ -183,8 +183,12 @@ class Line(Figure):
         x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
         padding = (Sizes.CELL_WIDTH - line_length) // 2
 
-        x += padding
-        y += padding
+        if self._orientation == FigureOrientation.NORTH or self._orientation == FigureOrientation.SOUTH:
+            x += Sizes.CELL_WIDTH // 2
+            y += padding
+        else:
+            y += Sizes.CELL_HEIGHT // 2
+            x += padding
 
         if self._position == FigurePosition.CENTER:
             x += Sizes.CELL_WIDTH
@@ -216,8 +220,12 @@ class Arrow(Figure):
         x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
         padding = (Sizes.CELL_WIDTH - line_length) // 2
 
-        x += padding
-        y += padding
+        if self._orientation == FigureOrientation.NORTH or self._orientation == FigureOrientation.SOUTH:
+            x += Sizes.CELL_WIDTH // 2
+            y += padding
+        else:
+            y += Sizes.CELL_HEIGHT // 2
+            x += padding
 
         if self._position == FigurePosition.CENTER:
             x += Sizes.CELL_WIDTH
