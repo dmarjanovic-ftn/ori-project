@@ -33,12 +33,13 @@ class Actions(object):
 
     @staticmethod
     def reject_example(canvas, answer_a, answer_b, answer_c, answer_d):
-        Actions.generate_figures()
+        generated = Actions.generate_figures()
+        answers = DataGenerator.create_answers(generated[0], generated[1], generated[2], generated[3], generated[4], generated[5])
 
-        answer_a._figures = Actions.figures[:2]
-        answer_b._figures = Actions.figures[2:4]
-        answer_c._figures = Actions.figures[4:6]
-        answer_d._figures = Actions.figures[6:]
+        answer_a._figures = generated[6:]
+        answer_b._figures = answers[:2]
+        answer_c._figures = answers[2:4]
+        answer_d._figures = answers[4:]
 
         answer_a.repaint()
         answer_b.repaint()

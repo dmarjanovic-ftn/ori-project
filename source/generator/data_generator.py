@@ -39,7 +39,7 @@ class DataGenerator:
         figure_orient2 = FigureOrientation(randint(1, 4))
         
         if figure_pos1 == figure_pos2:
-            figure_type1 = FigureType(random.choice([1, 2, 3, 4]))
+            figure_type1 = FigureType(randint(1, 4))
             figure_size1 = FigureSize(randint(2, 3))
             figure_size2 = FigureSize(randint(1, 2))
 
