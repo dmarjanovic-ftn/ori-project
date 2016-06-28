@@ -3,6 +3,7 @@
 
 from PySide import QtGui
 from canvas import Canvas
+from answer import AnswerResult
 from source.consts import Sizes
 from source.actions.actions import Actions
 
@@ -16,7 +17,7 @@ class MainWindow(QtGui.QMainWindow):
         self.setStyleSheet("background-color: #CFD8DC;")
 
         panel = QtGui.QWidget()
-        panel.setFixedSize(Sizes.BOX_WIDTH + 180, Sizes.BOX_HEIGHT + 15)
+        panel.setFixedSize(Sizes.BOX_WIDTH + 180, Sizes.BOX_HEIGHT + 150)
 
         buttons = QtGui.QVBoxLayout()
         accept = QtGui.QPushButton("Prihvati")
@@ -27,16 +28,29 @@ class MainWindow(QtGui.QMainWindow):
 
         canvas = Canvas()
 
+        results = QtGui.QHBoxLayout()
+
+        answer_a = AnswerResult()
+        answer_b = AnswerResult()
+        answer_c = AnswerResult()
+        answer_d = AnswerResult()
+
+        results.addWidget(answer_a)
+        results.addWidget(answer_b)
+        results.addWidget(answer_c)
+        results.addWidget(answer_d)
+
         accept.clicked.connect(lambda: Actions.accept_example(canvas))
-        reject.clicked.connect(lambda: Actions.reject_example(canvas))
+        reject.clicked.connect(lambda: Actions.reject_example(canvas, answer_a, answer_b, answer_c, answer_d))
 
         buttons.addWidget(accept)
         buttons.addWidget(reject)
         buttons.addStretch(0)
 
         layout = QtGui.QGridLayout()
-        layout.addWidget(canvas, 0, 0)
-        layout.addLayout(buttons, 0, 1)
+        layout.addWidget(canvas, 1, 0)
+        layout.addLayout(buttons, 1, 1)
+        layout.addLayout(results, 2, 0)
 
         panel.setLayout(layout)
 

@@ -16,7 +16,7 @@ class Figure(object):
 
     # Parent je QPainter
     @abstractmethod
-    def draw(self, parent, quadrant):
+    def draw(self, parent, quadrant, scale=1):
         pass
 
     def __str__(self):
@@ -31,33 +31,38 @@ class Square(Figure):
     """
     Klasa u kojoj iscrtavamo kvadrat
     """
-    def draw(self, parent, quadrant):
+    def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
         elif self._size == FigureSize.SMALLEST:
             self._size == FigureSize.SMALL
 
-        dimension = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
+        dimension = Sizes.FIXED_FIGURE_SIZE // scale + self._size.value * Sizes.FIGURE_SIZE_PARAM // scale
 
-        x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
-        padding = (Sizes.CELL_WIDTH - dimension) // 2
+        x = (Sizes.QUADRANT_WIDTH // scale) * (quadrant.value % 2)
+        y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
+        padding = (Sizes.CELL_WIDTH // scale - dimension) // 2
 
-        x += padding
-        y += padding
+        if scale == 1:
+            x += padding
+            y += padding
+        else:
+            x += 4
+            y += 4
 
         if self._position == FigurePosition.CENTER:
-            x += Sizes.CELL_WIDTH
-            y += Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH  // scale
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.TOP:
-            x += Sizes.CELL_WIDTH
+            x += Sizes.CELL_WIDTH  // scale
         elif self._position == FigurePosition.LEFT:
-            y += Sizes.CELL_HEIGHT
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.RIGHT:
-            y += Sizes.CELL_HEIGHT
-            x += 2 * Sizes.CELL_WIDTH
+            y += Sizes.CELL_HEIGHT // scale
+            x += 2 * Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.BOTTOM:
-            x += Sizes.CELL_WIDTH
-            y += 2 * Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += 2 * Sizes.CELL_HEIGHT // scale
 
         parent.drawRect(x, y, dimension, dimension)
 
@@ -66,33 +71,38 @@ class Circle(Figure):
     """
     Klasa u kojoj iscrtavamo krug
     """
-    def draw(self, parent, quadrant):
+    def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
         elif self._size == FigureSize.SMALLEST:
             self._size == FigureSize.SMALL
 
-        dimension = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
+        dimension = Sizes.FIXED_FIGURE_SIZE // scale + self._size.value * Sizes.FIGURE_SIZE_PARAM // scale
 
-        x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
-        padding = (Sizes.CELL_WIDTH - dimension) // 2
+        x = (Sizes.QUADRANT_WIDTH // scale) * (quadrant.value % 2)
+        y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
+        padding = (Sizes.CELL_WIDTH // scale - dimension) // 2
 
-        x += padding
-        y += padding
+        if scale == 1:
+            x += padding
+            y += padding
+        else:
+            x += 4
+            y += 4
 
         if self._position == FigurePosition.CENTER:
-            x += Sizes.CELL_WIDTH
-            y += Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.TOP:
-            x += Sizes.CELL_WIDTH
+            x += Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.LEFT:
-            y += Sizes.CELL_HEIGHT
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.RIGHT:
-            y += Sizes.CELL_HEIGHT
-            x += 2 * Sizes.CELL_WIDTH
+            y += Sizes.CELL_HEIGHT // scale
+            x += 2 * Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.BOTTOM:
-            y += 2 * Sizes.CELL_HEIGHT
-            x += Sizes.CELL_WIDTH
+            y += 2 * Sizes.CELL_HEIGHT // scale
+            x += Sizes.CELL_WIDTH // scale
 
         parent.drawEllipse(x, y, dimension, dimension)
 
@@ -101,34 +111,39 @@ class Triangle(Figure):
     """
     Klasa u kojoj iscrtavamo trougao
     """
-    def draw(self, parent, quadrant):
+    def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
         elif self._size == FigureSize.SMALLEST:
             self._size == FigureSize.SMALL
 
-        line_length = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
+        line_length = Sizes.FIXED_FIGURE_SIZE // scale + self._size.value * Sizes.FIGURE_SIZE_PARAM // scale
         triangle_height = line_length * 1.73 / 2.0
 
-        x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
-        padding = (Sizes.CELL_WIDTH - line_length) // 2
+        x = (Sizes.QUADRANT_WIDTH // scale) * (quadrant.value % 2)
+        y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
+        padding = (Sizes.CELL_WIDTH // scale - line_length) // 2
 
-        x += padding
-        y += padding
+        if scale == 1:
+            x += padding
+            y += padding
+        else:
+            x += 4
+            y += 4
 
         if self._position == FigurePosition.CENTER:
-            x += Sizes.CELL_WIDTH
-            y += Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.TOP:
-            x += Sizes.CELL_WIDTH
+            x += Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.LEFT:
-            y += Sizes.CELL_HEIGHT
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.RIGHT:
-            y += Sizes.CELL_HEIGHT
-            x += 2 * Sizes.CELL_WIDTH
+            y += Sizes.CELL_HEIGHT // scale
+            x += 2 * Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.BOTTOM:
-            y += 2 * Sizes.CELL_HEIGHT
-            x += Sizes.CELL_WIDTH
+            y += 2 * Sizes.CELL_HEIGHT // scale
+            x += Sizes.CELL_WIDTH // scale
 
         if self._orientation == FigureOrientation.NORTH:
             parent.drawLine(x + line_length / 2, y, x + line_length, y + triangle_height)
@@ -152,33 +167,38 @@ class Pie(Circle):
     """
     Klasa u kojoj iscrtavamo pitu
     """
-    def draw(self, parent, quadrant):
+    def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
         elif self._size == FigureSize.SMALLEST:
             self._size == FigureSize.SMALL
 
-        dimension = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
+        dimension = Sizes.FIXED_FIGURE_SIZE // scale + self._size.value * Sizes.FIGURE_SIZE_PARAM // scale
 
-        x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
-        padding = (Sizes.CELL_WIDTH - dimension) // 2
+        x = (Sizes.QUADRANT_WIDTH // scale) * (quadrant.value % 2)
+        y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
+        padding = (Sizes.CELL_WIDTH // scale - dimension) // 2
 
-        x += padding
-        y += padding
+        if scale == 1:
+            x += padding
+            y += padding
+        else:
+            x += 4
+            y += 4
 
         if self._position == FigurePosition.CENTER:
-            x += Sizes.CELL_WIDTH
-            y += Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.TOP:
-            x += Sizes.CELL_WIDTH
+            x += Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.LEFT:
-            y += Sizes.CELL_HEIGHT
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.RIGHT:
-            y += Sizes.CELL_HEIGHT
-            x += 2 * Sizes.CELL_WIDTH
+            y += Sizes.CELL_HEIGHT // scale
+            x += 2 * Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.BOTTOM:
-            x += Sizes.CELL_WIDTH
-            y += 2 * Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += 2 * Sizes.CELL_HEIGHT // scale
 
         if self._orientation == FigureOrientation.NORTH:
             parent.drawPie(x, y, dimension, dimension, 6 * 360, 12 * 360)
@@ -194,37 +214,38 @@ class Line(Figure):
     """
     Klasa u kojoj iscrtavamo liniju
     """
-    def draw(self, parent, quadrant):
+    def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
         elif self._size == FigureSize.SMALLEST:
             self._size == FigureSize.SMALL
 
-        line_length = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
+        line_length = Sizes.FIXED_FIGURE_SIZE // scale + self._size.value * Sizes.FIGURE_SIZE_PARAM // scale
 
-        x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
-        padding = (Sizes.CELL_WIDTH - line_length) // 2
+        x = (Sizes.QUADRANT_WIDTH // scale) * (quadrant.value % 2)
+        y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
+        padding = (Sizes.CELL_WIDTH // scale - line_length) // 2
 
         if self._orientation == FigureOrientation.NORTH or self._orientation == FigureOrientation.SOUTH:
-            x += Sizes.CELL_WIDTH // 2
+            x += (Sizes.CELL_WIDTH // scale) // 2
             y += padding
         else:
-            y += Sizes.CELL_HEIGHT // 2
+            y += (Sizes.CELL_HEIGHT // scale) // 2
             x += padding
 
         if self._position == FigurePosition.CENTER:
-            x += Sizes.CELL_WIDTH
-            y += Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.TOP:
-            x += Sizes.CELL_WIDTH
+            x += Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.LEFT:
-            y += Sizes.CELL_HEIGHT
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.RIGHT:
-            y += Sizes.CELL_HEIGHT
-            x += 2 * Sizes.CELL_WIDTH
+            y += Sizes.CELL_HEIGHT // scale
+            x += 2 * Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.BOTTOM:
-            y += 2 * Sizes.CELL_HEIGHT
-            x += Sizes.CELL_WIDTH
+            y += 2 * Sizes.CELL_HEIGHT // scale
+            x += Sizes.CELL_WIDTH // scale
 
         if self._orientation == FigureOrientation.WEST or self._orientation == FigureOrientation.EAST:
             parent.drawLine(x, y, x + line_length, y)
@@ -236,37 +257,38 @@ class Arrow(Figure):
     """
     Klasa u kojoj iscrtavamo strelicu
     """
-    def draw(self, parent, quadrant):
+    def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
         elif self._size == FigureSize.SMALLEST:
             self._size == FigureSize.SMALL
 
-        line_length = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
+        line_length = Sizes.FIXED_FIGURE_SIZE // scale + self._size.value * Sizes.FIGURE_SIZE_PARAM // scale
 
-        x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
-        padding = (Sizes.CELL_WIDTH - line_length) // 2
+        x = (Sizes.QUADRANT_WIDTH  // scale) * (quadrant.value % 2)
+        y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
+        padding = (Sizes.CELL_WIDTH // scale - line_length) // 2
 
         if self._orientation == FigureOrientation.NORTH or self._orientation == FigureOrientation.SOUTH:
-            x += Sizes.CELL_WIDTH // 2
+            x += (Sizes.CELL_WIDTH // scale) // 2
             y += padding
         else:
-            y += Sizes.CELL_HEIGHT // 2
+            y += (Sizes.CELL_HEIGHT // scale) // 2
             x += padding
 
         if self._position == FigurePosition.CENTER:
-            x += Sizes.CELL_WIDTH
-            y += Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.TOP:
-            x += Sizes.CELL_WIDTH
+            x += Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.LEFT:
-            y += Sizes.CELL_HEIGHT
+            y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.RIGHT:
-            y += Sizes.CELL_HEIGHT
-            x += 2 * Sizes.CELL_WIDTH
+            y += Sizes.CELL_HEIGHT // scale
+            x += 2 * Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.BOTTOM:
-            x += Sizes.CELL_WIDTH
-            y += 2 * Sizes.CELL_HEIGHT
+            x += Sizes.CELL_WIDTH // scale
+            y += 2 * Sizes.CELL_HEIGHT // scale
 
         if self._orientation == FigureOrientation.EAST:
             parent.drawLine(x, y, x + line_length, y)
