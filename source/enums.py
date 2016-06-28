@@ -26,9 +26,11 @@ class FigureOrientation(Enum):
 
 
 class FigureSize(Enum):
-    SMALL  = 1
-    MEDIUM = 2
-    BIG    = 3
+    SMALLEST = 0
+    SMALL    = 1
+    MEDIUM   = 2
+    BIG      = 3
+    BIGGEST  = 4
 
 
 class Quadrant(Enum):

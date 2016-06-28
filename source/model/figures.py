@@ -1,5 +1,5 @@
 from abc import abstractmethod
-from source.enums import FigurePosition, FigureOrientation
+from source.enums import FigurePosition, FigureOrientation, FigureSize
 from source.consts import *
 
 
@@ -32,6 +32,10 @@ class Square(Figure):
     Klasa u kojoj iscrtavamo kvadrat
     """
     def draw(self, parent, quadrant):
+        if self._size == FigureSize.BIGGEST:
+            self._size = FigureSize.BIG
+        elif self._size == FigureSize.SMALLEST:
+            self._size == FigureSize.SMALL
 
         dimension = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
 
@@ -63,6 +67,10 @@ class Circle(Figure):
     Klasa u kojoj iscrtavamo krug
     """
     def draw(self, parent, quadrant):
+        if self._size == FigureSize.BIGGEST:
+            self._size = FigureSize.BIG
+        elif self._size == FigureSize.SMALLEST:
+            self._size == FigureSize.SMALL
 
         dimension = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
 
@@ -94,6 +102,11 @@ class Triangle(Figure):
     Klasa u kojoj iscrtavamo trougao
     """
     def draw(self, parent, quadrant):
+        if self._size == FigureSize.BIGGEST:
+            self._size = FigureSize.BIG
+        elif self._size == FigureSize.SMALLEST:
+            self._size == FigureSize.SMALL
+
         line_length = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
         triangle_height = line_length * 1.73 / 2.0
 
@@ -140,6 +153,10 @@ class Pie(Circle):
     Klasa u kojoj iscrtavamo pitu
     """
     def draw(self, parent, quadrant):
+        if self._size == FigureSize.BIGGEST:
+            self._size = FigureSize.BIG
+        elif self._size == FigureSize.SMALLEST:
+            self._size == FigureSize.SMALL
 
         dimension = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
 
@@ -178,6 +195,11 @@ class Line(Figure):
     Klasa u kojoj iscrtavamo liniju
     """
     def draw(self, parent, quadrant):
+        if self._size == FigureSize.BIGGEST:
+            self._size = FigureSize.BIG
+        elif self._size == FigureSize.SMALLEST:
+            self._size == FigureSize.SMALL
+
         line_length = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
 
         x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
@@ -215,6 +237,11 @@ class Arrow(Figure):
     Klasa u kojoj iscrtavamo strelicu
     """
     def draw(self, parent, quadrant):
+        if self._size == FigureSize.BIGGEST:
+            self._size = FigureSize.BIG
+        elif self._size == FigureSize.SMALLEST:
+            self._size == FigureSize.SMALL
+
         line_length = Sizes.FIXED_FIGURE_SIZE + self._size.value * Sizes.FIGURE_SIZE_PARAM
 
         x, y = Sizes.QUADRANT_WIDTH * (quadrant.value % 2), Sizes.QUADRANT_HEIGHT * (quadrant.value // 2)
