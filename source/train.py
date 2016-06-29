@@ -1,5 +1,6 @@
+from keras.callbacks import ModelCheckpoint
 from keras.models import Sequential
-from keras.layers import Dense
+from keras.layers import Dense, Dropout
 import numpy
 
 
@@ -33,6 +34,14 @@ def train_first():
     print("%s: %.2f%%" % (model.metrics_names[1], scores[1]*100))
 
 
+def create_model():
+    # Kreiranje modela
+    model = Sequential()
+    model.add(Dense(10, input_dim=24, input_shape=(1, 24), init='uniform', activation='linear'))
+    # model.add(Dense(12, init='uniform', activation='linear'))
+    model.add(Dense(8, init='uniform', activation='linear'))
+    return model
+
 def train_tree_figures_input_one_figure_output():
     # Ucitavamo skup generisanih primjera
     dataset = numpy.loadtxt("../docs/generated-examples.csv", delimiter=",")
@@ -43,18 +52,14 @@ def train_tree_figures_input_one_figure_output():
 
     # input_data  = input_data / input_data.max(axis=0)
     # output_data = output_data / output_data.max(axis=0)
-
-    # Kreiranje modela
-    model = Sequential()
-    model.add(Dense(10, input_dim=24, input_shape=(1, 24), init='uniform', activation='linear'))
-    # model.add(Dense(12, init='uniform', activation='linear'))
-    model.add(Dense(8, init='uniform', activation='linear'))
+    model = create_model()
 
     # Kompajliranje modela
     model.compile(loss='mean_squared_error', optimizer='sgd', metrics=['accuracy'])
 
     # Fitovanje modela
-    model.fit(input_data, output_data, nb_epoch=10, validation_split=0.2, batch_size=32)
+    checkpointer = ModelCheckpoint(filepath="../docs/weights.hdf5", verbose=1, save_best_only=True)
+    model.fit(input_data, output_data, nb_epoch=10, validation_split=0.2, batch_size=32, callbacks=[checkpointer])
 
     # Evauliranje modela
     scores = model.evaluate(input_data, output_data)
@@ -63,6 +68,7 @@ def train_tree_figures_input_one_figure_output():
     # json_string = model.to_json()
     # open('../docs/model.json', 'w').write(json_string)
     # open('../docs/weights.txt', 'w').write(str(model.get_weights()))
+
 
     # Ucitavanje modela i postavljanje tezina (FIXME)
     # model = model_from_json(open('model.json').read())
@@ -81,5 +87,12 @@ def train_tree_figures_input_one_figure_output():
         print test_out[i]
 
 
+def load_trained_model():
+    model = create_model()
+    model.load_weights("../docs/weights.hdf5")
+    return model
+
 if __name__ == "__main__":
+    #load_trained_model()
+
     train_tree_figures_input_one_figure_output()

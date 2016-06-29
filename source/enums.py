@@ -38,3 +38,12 @@ class Quadrant(Enum):
     TOP_RIGHT    = 1
     BOTTOM_LEFT  = 2
     BOTTOM_RIGHT = 3
+
+
+class AnswerState(Enum):
+    NOT_CHECKED = 0
+    CHECKED     = 1
+    CORRECT     = 2
+    WRONG       = 3
+    INVALID     = 4
+    FINISHED    = 5

@@ -184,11 +184,6 @@ if __name__ == "__main__":
 
     output_file.close()
 
-
     generated = dg.generate_data()
     for figure in generated:
         print figure
-
-    print "answers"
-    for answer in DataGenerator.create_answers(generated[0], generated[1], generated[2], generated[3], generated[4], generated[5]):
-        print answer

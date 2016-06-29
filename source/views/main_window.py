@@ -20,31 +20,47 @@ class MainWindow(QtGui.QMainWindow):
         panel.setFixedSize(Sizes.BOX_WIDTH + 180, Sizes.BOX_HEIGHT + 150)
 
         buttons = QtGui.QVBoxLayout()
-        accept = QtGui.QPushButton("Prihvati")
-        reject = QtGui.QPushButton("Odbij")
+        accept = QtGui.QPushButton("Potvrdi")
+        reject = QtGui.QPushButton(u"Sljedeći")
+        fifty = QtGui.QPushButton("50:50")
+        prob = QtGui.QPushButton(u"Pomoć prijatelja")
 
         accept.setStyleSheet("background-color: #eee;")
         reject.setStyleSheet("background-color: #eee;")
+        fifty.setStyleSheet("background-color: #eee;")
+        prob.setStyleSheet("background-color: #eee;")
 
         canvas = Canvas()
 
         results = QtGui.QHBoxLayout()
 
-        answer_a = AnswerResult()
-        answer_b = AnswerResult()
-        answer_c = AnswerResult()
-        answer_d = AnswerResult()
+        answer_a = AnswerResult(self, "A")
+        answer_b = AnswerResult(self, "B")
+        answer_c = AnswerResult(self, "C")
+        answer_d = AnswerResult(self, "D")
+
+        self.answers = []
+        self.answers.append(answer_a)
+        self.answers.append(answer_b)
+        self.answers.append(answer_c)
+        self.answers.append(answer_d)
+
+        self.checked = None
 
         results.addWidget(answer_a)
         results.addWidget(answer_b)
         results.addWidget(answer_c)
         results.addWidget(answer_d)
 
-        accept.clicked.connect(lambda: Actions.accept_example(canvas))
+        accept.clicked.connect(lambda: Actions.accept_example(answer_a, answer_b, answer_c, answer_d))
         reject.clicked.connect(lambda: Actions.reject_example(canvas, answer_a, answer_b, answer_c, answer_d))
+        fifty.clicked.connect(lambda: Actions.fifty_help(answer_a, answer_b, answer_c, answer_d))
+        prob.clicked.connect(lambda: Actions.probability_help(answer_a, answer_b, answer_c, answer_d))
 
         buttons.addWidget(accept)
         buttons.addWidget(reject)
+        buttons.addWidget(fifty)
+        buttons.addWidget(prob)
         buttons.addStretch(0)
 
         layout = QtGui.QGridLayout()
@@ -55,3 +71,6 @@ class MainWindow(QtGui.QMainWindow):
         panel.setLayout(layout)
 
         self.setCentralWidget(panel)
+
+        # initialize box first time
+        Actions.reject_example(canvas, answer_a, answer_b, answer_c, answer_d)

@@ -7,6 +7,7 @@ class Figure(object):
     """
     Apstraktna klasa za podrzane objekte
     """
+
     def __init__(self, fig_type, position, size, orientation=None, attribute=None):
         self._type = fig_type
         self._position = position
@@ -21,16 +22,27 @@ class Figure(object):
 
     def __str__(self):
         return str(self._type.value) + "," + str(self._position.value) + "," + str(self._orientation.value) + "," \
-            + str(self._size.value)
+               + str(self._size.value)
 
     def __repr__(self):
         return str(self._type) + "," + str(self._position)
+
+    def __eq__(self, other):
+        if isinstance(other, self.__class__):
+            if self._orientation == other._orientation and self._position == other._position and \
+                            self._size == other._size and self._type == other._type:
+                return True
+        return False
+
+    def get_attributes(self):
+        return [self._type.value, self._position.value, self._orientation.value, self._size.value]
 
 
 class Square(Figure):
     """
     Klasa u kojoj iscrtavamo kvadrat
     """
+
     def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
@@ -51,10 +63,10 @@ class Square(Figure):
             y += 4
 
         if self._position == FigurePosition.CENTER:
-            x += Sizes.CELL_WIDTH  // scale
+            x += Sizes.CELL_WIDTH // scale
             y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.TOP:
-            x += Sizes.CELL_WIDTH  // scale
+            x += Sizes.CELL_WIDTH // scale
         elif self._position == FigurePosition.LEFT:
             y += Sizes.CELL_HEIGHT // scale
         elif self._position == FigurePosition.RIGHT:
@@ -71,6 +83,7 @@ class Circle(Figure):
     """
     Klasa u kojoj iscrtavamo krug
     """
+
     def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
@@ -111,6 +124,7 @@ class Triangle(Figure):
     """
     Klasa u kojoj iscrtavamo trougao
     """
+
     def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
@@ -167,6 +181,7 @@ class Pie(Circle):
     """
     Klasa u kojoj iscrtavamo pitu
     """
+
     def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
@@ -214,6 +229,7 @@ class Line(Figure):
     """
     Klasa u kojoj iscrtavamo liniju
     """
+
     def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
@@ -257,6 +273,7 @@ class Arrow(Figure):
     """
     Klasa u kojoj iscrtavamo strelicu
     """
+
     def draw(self, parent, quadrant, scale=1):
         if self._size == FigureSize.BIGGEST:
             self._size = FigureSize.BIG
@@ -265,7 +282,7 @@ class Arrow(Figure):
 
         line_length = Sizes.FIXED_FIGURE_SIZE // scale + self._size.value * Sizes.FIGURE_SIZE_PARAM // scale
 
-        x = (Sizes.QUADRANT_WIDTH  // scale) * (quadrant.value % 2)
+        x = (Sizes.QUADRANT_WIDTH // scale) * (quadrant.value % 2)
         y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
         padding = (Sizes.CELL_WIDTH // scale - line_length) // 2
 
