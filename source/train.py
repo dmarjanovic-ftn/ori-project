@@ -59,7 +59,7 @@ def train_tree_figures_input_one_figure_output():
 
     # Fitovanje modela
     checkpointer = ModelCheckpoint(filepath="../docs/weights.hdf5", verbose=1, save_best_only=True)
-    model.fit(input_data, output_data, nb_epoch=10, validation_split=0.2, batch_size=32, callbacks=[checkpointer])
+    model.fit(input_data, output_data, nb_epoch=50, validation_split=0.2, batch_size=32, callbacks=[checkpointer])
 
     # Evauliranje modela
     scores = model.evaluate(input_data, output_data)
