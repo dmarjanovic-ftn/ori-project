@@ -55,12 +55,8 @@ class Square(Figure):
         y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
         padding = (Sizes.CELL_WIDTH // scale - dimension) // 2
 
-        if scale == 1:
-            x += padding
-            y += padding
-        else:
-            x += 4
-            y += 4
+        x += padding
+        y += padding
 
         if self._position == FigurePosition.CENTER:
             x += Sizes.CELL_WIDTH // scale
@@ -96,12 +92,8 @@ class Circle(Figure):
         y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
         padding = (Sizes.CELL_WIDTH // scale - dimension) // 2
 
-        if scale == 1:
-            x += padding
-            y += padding
-        else:
-            x += 4
-            y += 4
+        x += padding
+        y += padding
 
         if self._position == FigurePosition.CENTER:
             x += Sizes.CELL_WIDTH // scale
@@ -138,12 +130,8 @@ class Triangle(Figure):
         y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
         padding = (Sizes.CELL_WIDTH // scale - line_length) // 2
 
-        if scale == 1:
-            x += padding
-            y += padding
-        else:
-            x += 4
-            y += 4
+        x += padding
+        y += padding
 
         if self._position == FigurePosition.CENTER:
             x += Sizes.CELL_WIDTH // scale
@@ -194,12 +182,8 @@ class Pie(Circle):
         y = (Sizes.QUADRANT_HEIGHT // scale) * (quadrant.value // 2)
         padding = (Sizes.CELL_WIDTH // scale - dimension) // 2
 
-        if scale == 1:
-            x += padding
-            y += padding
-        else:
-            x += 4
-            y += 4
+        x += padding
+        y += padding
 
         if self._position == FigurePosition.CENTER:
             x += Sizes.CELL_WIDTH // scale
